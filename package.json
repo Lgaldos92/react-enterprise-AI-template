@@ -1,5 +1,6 @@
 {
-  "name": "quick-start-react-template",
+  "name": "react-enterprise-ai-template",
+  "description": "Production-ready React 19 template powered by Vite, featuring a Supabase Repository pattern, TanStack Query caching, generic Azure OpenAI integrations, and a fluid Mantine layout.",
   "private": true,
   "version": "0.1.0",
   "type": "module",

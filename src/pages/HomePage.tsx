@@ -18,7 +18,7 @@ const HomePage: React.FC = () => {
             Dashboard
           </Title>
           <Text c="var(--text-secondary)" size="var(--font-title-md)">
-            This project template is initialized with generic CRUD repositories and Azure OpenAI services.
+            This project template is initialized with generic CRUD repositories and OpenAI / Azure AI services.
           </Text>
           <Text mt="var(--spacing-text)" size="var(--font-body)" c="var(--text-primary)">
             Define your new data model in <Text span ff="monospace" fw={600}>supabase/schema.sql </Text>

@@ -1,46 +1,70 @@
-# Quick Start React Template
+# React Enterprise AI Template
 
-A production-ready foundation for building modern web applications. This template provides a highly opinionated, scalable baseline focusing on developer experience, reactive design, and backend readiness.
+A production-ready React 19 boilerplate configured with Vite, Mantine v8, TanStack Query v5, Supabase, and a unified LLM Service (OpenAI/Azure). It implements a decoupled architecture suitable for scalable applications.
 
-## 🚀 Core Features & Stack
+---
 
-- **UI Framework**: React + Mantine v8. Complete with a natively integrated Dark/Light mode toggle.
-- **Design System**: Centralized `index.css` leveraging CSS Variables for fluid layouts (`vw/vh`) and typography (`rem`), featuring a premium Slate & Blue color palette.
-- **Data & Backend**: Pre-configured Supabase Repository Pattern for scalable CRUD operations.
-- **State & Fetching**: TanStack React Query v5 pre-integrated for caching and server-state management.
-- **AI Integration**: Boilerplate service for connecting to Azure OpenAI (`gpt-4.1`).
-- **Routing**: React Router v7 (HashRouter) configured out of the box.
+## 🏗️ Architecture & Core Patterns
 
-## 🛠️ Getting Started
+### 1. Database Repository Pattern
+Data access logic is abstracted away from UI components.
+- **Implementation**: `src/lib/repositories/` contains generic abstract classes and concrete Supabase implementations.
+- **Technical Benefit**: Decouples React components from the BaaS (Supabase). This allows for seamless mocking in unit tests or swapping the underlying database engine without refactoring component logic.
+
+### 2. Asynchronous State Management
+Global server-state management is handled by TanStack React Query.
+- **Implementation**: Integrated at the root level (`main.tsx`) via `queryClient.ts`.
+- **Technical Benefit**: Replaces manual `useEffect` fetching. Provides automatic caching, request deduplication, background refetch-on-window-focus, and built-in `isLoading`/`isError` state handling.
+
+### 3. Unified LLM Integration (OpenAI & Azure)
+A centralized AI service for interacting with ChatGPT models.
+- **Implementation**: `src/lib/services/LLMService.ts` implements an agnostic wrapper.
+- **Technical Benefit**: Dynamically routes API requests based on environment configurations. Dispatches standard `Bearer` token requests to `api.openai.com` if `VITE_OPENAI_API_KEY` is present, or falls back to custom endpoint routing using `api-key` headers for Azure OpenAI deployments.
+
+### 4. Fluid Design System & Custom CSS Variables
+UI constraints are managed via native CSS definitions rather than strictly relying on Mantine's defaults.
+- **Implementation**: `index.css` scopes layout tokens (`rem`) and fluid dimensions (`vw/vh`) to the `:root`. Scheme-aware selectors (`[data-mantine-color-scheme="dark"]`) override color palettes in real-time.
+- **Technical Benefit**: Ensures zero-flicker Dark/Light theme switching directly tied to Mantine's engine, with stable, rem-based layout spacing that scales proportionally with browser accessibility settings.
+
+---
+
+## 🛠️ Quick Start
 
 ### 1. Environment Setup
-Copy the `.env.example` file to create your local environment setting:
+Copy the environment template and configure your keys:
 ```bash
 cp .env.example .env
 ```
-Fill in your Supabase and Azure OpenCV credentials in `.env`.
+*(Required: Ensure you define either standard OpenAI credentials or Azure OpenAI credentials).*
 
-### 2. Installation
+### 2. Installation & Run
 ```bash
 npm install
-```
-
-### 3. Development Server
-```bash
 npm run dev
 ```
 
-## 🏗️ Architecture Directory
+### 3. Implementation Workflow
+1. **Schema**: Define your PostgreSQL tables in `supabase/schema.sql`.
+2. **Types**: Reflect your entities globally in `src/lib/types.ts`.
+3. **Usage**: Import the database factory `db` from `src/lib/db.ts` and fetch entries inside your hooks: `useQuery({ queryKey: [...], queryFn: () => db.findAll('table_name') })`.
 
-- `src/main.tsx`: App entry point with all Providers (Mantine, React Query).
-- `src/App.tsx`: Routing configuration.
-- `src/layouts/`: Base layout components (`MainLayout` with responsive Sidebar and Header).
-- `src/pages/`: Root pages (`HomePage`).
-- `src/lib/`:
-  - `repositories/`: Database abstraction layer (Generic Supabase CRUD).
-  - `services/`: External API integrations (Azure OpenAI).
-  - `types.ts`: Domain models (`Profile`, `GenericEntity`).
-- `supabase/schema.sql`: Your database table definitions.
+---
 
-## 🎨 Theme Customization
-To customize the visual identity of the app, simply modify the variables in `src/index.css`. The entire application responds automatically to changes in `--primary-color`, typography scaling, and spacing variables.
+## 📂 Directory Structure
+
+```text
+src/
+├── lib/
+│   ├── repositories/       # Generic CRUD abstractions and implementations
+│   ├── services/           # Third-party integrations (LLMService)
+│   ├── config.ts           # Environment variable mapping
+│   ├── db.ts               # Database factory and DI container
+│   ├── queryClient.ts      # Global React Query cache configuration
+│   └── types.ts            # Global Type/Interface definitions
+├── layouts/
+│   └── MainLayout.tsx      # Core AppShell (Header, Navbar, Theme Toggle)
+├── pages/
+│   └── HomePage.tsx        # View components
+├── main.tsx                # Application entry point & Providers
+└── index.css               # Design system tokens and baseline resets
+```

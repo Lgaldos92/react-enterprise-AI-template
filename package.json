@@ -1,0 +1,33 @@
+{
+  "name": "quick-start-react-template",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@mantine/core": "^8.3.16",
+    "@mantine/hooks": "^8.3.16",
+    "@mantine/notifications": "^8.3.16",
+    "@supabase/supabase-js": "^2.49.1",
+    "@tabler/icons-react": "^3.41.1",
+    "@tanstack/react-query": "^5.90.21",
+    "axios": "^1.13.6",
+    "clsx": "^2.1.1",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-router-dom": "^7.13.0",
+    "tailwind-merge": "^3.5.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.1",
+    "typescript": "~5.9.3",
+    "vite": "^7.3.1"
+  }
+}

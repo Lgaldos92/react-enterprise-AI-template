@@ -1,0 +1,73 @@
+:root[data-mantine-color-scheme="light"],
+:root {
+  /* Colors - Light Theme (Slate & Blue) */
+  --primary-color: #2563eb;
+  --primary-hover: #1d4ed8;
+  --secondary-color: #64748b;
+  --accent-color: #0ea5e9;
+  --bg-color: #f8fafc;
+  --surface-color: #ffffff;
+  --border-color: #e2e8f0;
+
+  /* Text Colors */
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+  --text-on-primary: #ffffff;
+}
+
+:root[data-mantine-color-scheme="dark"] {
+  /* Colors - Dark Theme (Slate & Blue) */
+  --primary-color: #3b82f6;
+  --primary-hover: #60a5fa;
+  --secondary-color: #94a3b8;
+  --accent-color: #38bdf8;
+  --bg-color: #0f172a;
+  --surface-color: #1e293b;
+  --border-color: #334155;
+
+  /* Text Colors */
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-on-primary: #ffffff;
+}
+
+:root {
+
+  /* Layout Dimensions (Stable) */
+  --header-height: 4rem;
+  --navbar-width: 12rem;
+  --main-padding: 1rem;
+  --navbar-padding: 0.5rem;
+
+  /* Typography (Rem) */
+  --font-title-lg: 1.8rem;
+  --font-title-md: 1.1rem;
+  --font-body: 1rem;
+  --font-sm: 0.9rem;
+  --font-xs: 0.75rem;
+
+  /* Spacing & Aesthetics */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 0.75rem;
+  --spacing-text: 1rem;
+
+  --spacing-md: 1rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
